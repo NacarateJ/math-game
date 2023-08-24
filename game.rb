@@ -23,9 +23,11 @@ class Game
 
   def play_round
     current_player = get_current_player
-    question = current_player.ask_question
+    question = MathQuestion.new
+    current_player.ask_question(question.question)
     answer = gets.chomp.to_i
-    current_player.answer_question(answer)
+    correct = question.check_answer(answer)
+    current_player.answer_question(correct)
   end
 
   def get_current_player
