@@ -1,15 +1,20 @@
 class MathQuestion
   def initialize
-    @num1 = rand(1..20)
-    @num2 = rand(1..20)
-    @correct_answer = @num1 + @num2
+    generate_question
   end
 
   def generate_question
-    "What does #{@num1} plus #{@num2} equal?"
+    @num1 = rand(1..20)
+    @num2 = rand(1..20)
+    @question = "What does #{@num1} plus #{@num2} equal?"
+    @correct_answer = @num1 + @num2
   end
 
-  def correct_answer
-    @correct_answer
+  def question
+    @question
+  end
+
+  def check_answer(answer)
+    answer.to_i == @correct_answer
   end
 end

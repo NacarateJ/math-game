@@ -9,25 +9,18 @@ class Player
     @lives = 3
   end
 
-  def ask_question
-    question = current_question.generate_question
+  def ask_question(question)
     puts "#{name}: #{question}"
     print "> "
   end
 
-  def answer_question(answer)
-    if answer.to_i == @current_question.correct_answer
+  def answer_question(correct)
+    if correct
       puts "#{@name}: YES! You are correct."
     else
       puts "#{@name}: Seriously? No!"
       @lives -= 1
     end
-  end
-
-  private
-
-  def current_question
-    @current_question = MathQuestion.new
   end
 end
 
