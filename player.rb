@@ -1,4 +1,4 @@
-require_relative 'math_question'
+require_relative "math_question"
 
 class Player
   attr_reader :name
@@ -9,6 +9,12 @@ class Player
     @lives = 3
   end
 
+  def ask_question
+    question = current_question.generate_question
+    puts "#{name}: #{question}"
+    print "> "
+  end
+
   def answer_question(answer)
     if answer.to_i == @current_question.correct_answer
       puts "#{@name}: YES! You are correct."
@@ -16,17 +22,6 @@ class Player
       puts "#{@name}: Seriously? No!"
       @lives -= 1
     end
-  end
-
-  def ask_question
-    question = current_question.generate_question
-    puts "#{name}: #{question}"
-    print "> "
-    question
-  end
-
-  def correct_answers_count
-    3 - @lives
   end
 
   private
