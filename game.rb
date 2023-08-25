@@ -1,37 +1,19 @@
 require_relative "player"
+require_relative "math_question"
 
 class Game
   def initialize(player1_name, player2_name)
     @player1 = Player.new(player1_name)
     @player2 = Player.new(player2_name)
+    @current_player = @player1
   end
-
-  def start_game
-    puts "----- NEW GAME -----"
-    loop do
-      play_round
-      break if game_over?
-      switch_players
-      display_scores_and_lives
-    end
-    announce_winner
-    puts "----- GAME OVER -----"
-    puts "Goodbye!"
-  end
-
-  private
 
   def play_round
-    current_player = get_current_player
     question = MathQuestion.new
-    current_player.ask_question(question.question)
+    @current_player.ask_question(question.question)
     answer = gets.chomp.to_i
     correct = question.check_answer(answer)
-    current_player.answer_question(correct)
-  end
-
-  def get_current_player
-    @current_player ||= @player1
+    @current_player.answer_question(correct)
   end
 
   def switch_players
@@ -52,7 +34,3 @@ class Game
     puts "#{winner.name} wins with a score of #{winner.lives}/3"
   end
 end
-
-# Create a new instance of the Game class and start the game
-game = Game.new("Player 1", "Player 2")
-game.start_game
