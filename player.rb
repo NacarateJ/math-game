@@ -16,11 +16,17 @@ class Player
 
   def answer_question(correct)
     if correct
-      puts "#{@name}: YES! You are correct."
+      puts "#{name}: YES! You are correct."
     else
-      puts "#{@name}: Seriously? No!"
-      @lives -= 1
+      puts "#{name}: Seriously? No!"
+      lose_life
     end
+  end
+
+  private
+
+  def lose_life
+    @lives -= 1
   end
 end
 
